@@ -1,0 +1,151 @@
+/* ---- palette lifted from the existing guide ---- */
+:root{
+  --ink:#141824; --navy:#20243c; --slate:#3c4356; --muted:#6b7284;
+  --border:#dfe3ec; --panel:#f6f7fb; --panelalt:#fafbfd;
+  --blue:#3538a8; --green:#15713f; --red:#d3372a; --amber:#a85a06;
+  --teal:#0d7a84; --purple:#7a2f8f;
+  --pinktint:#fdecea; --purpletint:#f6e9f9; --ambertint:#fdf1de; --tealtint:#e4f4f5;
+  --bluetint:#eef0fa; --greentint:#e8f3ec;
+}
+
+/* ---- the guide's own Segoe UI faces, recovered from the PDF ---- */
+@font-face{font-family:SegReg;src:url(fonts/CAAAAA_SegoeUI.ttf)}
+@font-face{font-family:SegBoldA;src:url(fonts/EAAAAA_SegoeUI-Bold.ttf)}
+@font-face{font-family:SegBoldB;src:url(fonts/DAAAAA_SegoeUI-Bold.ttf)}
+@font-face{font-family:SegBoldC;src:url(fonts/GAAAAA_SegoeUI-Bold.ttf)}
+@font-face{font-family:SegBoldD;src:url(fonts/HAAAAA_SegoeUI-Bold.ttf)}
+@font-face{font-family:SegBoldE;src:url(fonts/JAAAAA_SegoeUI-Bold.ttf)}
+@font-face{font-family:SegItal;src:url(fonts/IAAAAA_SegoeUI-Italic.ttf)}
+@font-face{font-family:SegSemiA;src:url(fonts/KAAAAA_SegoeUI-Semibold.ttf)}
+@font-face{font-family:SegSemiB;src:url(fonts/AAAAAA_SegoeUI-Semibold.ttf)}
+@font-face{font-family:SegBlack;src:url(fonts/BAAAAA_SegoeUIBlack.ttf)}
+@font-face{font-family:SegSym;src:url(fonts/QAAAAA_SegoeUISymbol.ttf)}
+
+/* per-glyph fallback unions the subsets, so a character missing from one
+   face is picked up from another cut of the same weight */
+:root{
+  --reg:SegReg,SegSym,SegSemiA,"Helvetica Neue",sans-serif;
+  --bold:SegBoldA,SegBoldB,SegBoldC,SegBoldD,SegBoldE,SegSym,"Helvetica Neue",sans-serif;
+  --ital:SegItal,SegSym,"Helvetica Neue",sans-serif;
+  --semi:SegSemiA,SegSemiB,SegSym,"Helvetica Neue",sans-serif;
+  --black:SegBlack,SegBoldA,"Helvetica Neue",sans-serif;
+  --mono:Menlo,monospace;
+}
+
+@page{size:594.96pt 841.92pt;margin:0}
+html,body{margin:0;padding:0}
+body{font-family:var(--reg);color:var(--ink);-webkit-font-smoothing:antialiased}
+
+.page{
+  width:594.96pt;height:841.92pt;box-sizing:border-box;
+  padding:36pt 36.16pt 34pt 36.8pt;
+  position:relative;overflow:hidden;page-break-after:always;background:#fff;
+}
+.page:last-child{page-break-after:auto}
+.inner{width:522pt}
+
+/* ---- part header ---- */
+h1{font-family:var(--black);font-size:21pt;line-height:1.12;color:var(--ink);
+   margin:0;letter-spacing:-.005em}
+.badge{display:inline-block;margin-top:8.5pt;padding:4.4pt 10pt 4.2pt;
+  background:var(--purpletint);color:var(--purple);border-radius:3pt;
+  font-family:var(--bold);font-size:8.5pt;letter-spacing:.14em;line-height:1}
+p.lede{font-size:10.99pt;line-height:1.5;color:var(--slate);margin:13pt 0 0;max-width:468pt}
+hr.rule{border:0;height:.8pt;background:var(--border);width:468pt;margin:21pt 0 0}
+
+/* ---- headings & text ---- */
+h2{font-family:var(--bold);font-size:13.99pt;line-height:1.25;color:var(--ink);margin:23pt 0 0}
+.page > .inner > h2:first-child{margin-top:0}
+h3{font-family:var(--bold);font-size:11.4pt;line-height:1.3;color:var(--ink);margin:19pt 0 0}
+p{font-size:10.39pt;line-height:1.585;margin:13pt 0 0}
+p.note{font-size:9.3pt;line-height:1.45;color:var(--muted);margin:15pt 0 0}
+b,strong{font-family:var(--bold);font-weight:normal}
+i,em{font-family:var(--ital);font-style:normal}
+code{font-family:var(--mono);font-size:.87em;background:var(--panel);
+  border:.6pt solid var(--border);border-radius:2.5pt;padding:.9pt 2.6pt;color:var(--navy)}
+.tag{font-family:var(--bold);font-size:8.2pt;color:var(--ink);letter-spacing:.02em}
+
+/* ---- figures ---- */
+figure{margin:19pt 0 0}
+figure svg{display:block}
+figcaption{font-size:8.6pt;line-height:1.4;text-align:center;margin-top:11pt;color:var(--muted);font-family:var(--ital)}
+figcaption b{font-family:var(--bold);color:var(--slate)}
+.fignote{background:var(--panel);border:.75pt solid var(--border);border-radius:3.5pt;
+  padding:7pt 9pt;margin-top:9pt}
+.fignote .t{font-family:var(--bold);font-size:6.9pt;line-height:1.35;color:var(--ink)}
+.fignote .d{font-size:6.7pt;line-height:1.4;color:var(--slate);margin-top:2.4pt}
+.figdiv{height:.75pt;background:var(--border);margin:12pt 0}
+
+/* ---- cards ---- */
+.cards{display:flex;gap:10.5pt;margin-top:16pt}
+.card{flex:1;background:#fff;border:.75pt solid var(--border);border-top:2.2pt solid var(--blue);
+  border-radius:3.5pt;padding:11pt 12pt 12pt;box-sizing:border-box}
+.card.good{border-top-color:var(--green)}
+.card.bad{border-top-color:var(--red)}
+.card h4{font-family:var(--bold);font-size:10pt;line-height:1.2;margin:0;color:var(--ink)}
+.card ol,.card ul{margin:8.5pt 0 0;padding:0;list-style:none}
+.card li{font-size:8.89pt;line-height:1.43;color:var(--slate);margin-top:2.6pt}
+.card li:first-child{margin-top:0}
+.card li b{color:var(--ink)}
+.card p{font-size:8.89pt;line-height:1.43;color:var(--slate);margin-top:8pt}
+
+/* ---- callouts ---- */
+.callout{margin-top:17pt;padding:11.5pt 14pt 12.5pt 15.7pt;border-left:2.8pt solid var(--amber);
+  background:var(--ambertint)}
+.callout .lbl{font-family:var(--bold);font-size:9pt;letter-spacing:.11em;color:var(--amber);
+  display:block;line-height:1}
+.callout p{font-size:10.39pt;line-height:1.55;margin-top:9pt;color:var(--ink)}
+.callout.teal{border-left-color:var(--teal);background:var(--tealtint)}
+.callout.teal .lbl{color:var(--teal)}
+.callout.purple{border-left-color:var(--purple);background:var(--purpletint)}
+.callout.purple .lbl{color:var(--purple)}
+.callout.blue{border-left-color:var(--blue);background:var(--bluetint)}
+.callout.blue .lbl{color:var(--blue)}
+
+/* ---- panel list ---- */
+.panel{margin-top:16pt;background:var(--panelalt);border:.75pt solid var(--border);
+  border-radius:3.5pt;padding:12pt 14pt}
+.panel .lbl{font-family:var(--bold);font-size:8.6pt;letter-spacing:.1em;color:var(--slate);
+  display:block;line-height:1}
+.panel ul{margin:9pt 0 0;padding:0;list-style:none;column-count:2;column-gap:18pt}
+.panel li{font-size:9.1pt;line-height:1.42;color:var(--slate);margin-top:3.4pt;
+  break-inside:avoid;padding-left:9pt;text-indent:-9pt}
+.panel li:first-child{margin-top:0}
+.panel li b{color:var(--ink)}
+.panel li .dot{color:var(--blue);font-family:var(--bold)}
+
+/* ---- tables ---- */
+table{border-collapse:collapse;width:522pt;margin-top:16pt;table-layout:fixed}
+th{background:var(--navy);color:#fff;font-family:var(--bold);font-size:8.8pt;line-height:1.3;
+  text-align:left;padding:8.5pt 8.4pt;vertical-align:top}
+th:first-child{border-top-left-radius:2pt;border-bottom-left-radius:0}
+td{font-size:8.6pt;line-height:1.57;padding:7.6pt 8.4pt;vertical-align:top;color:var(--ink);
+  border-bottom:.75pt solid var(--border)}
+tbody tr:nth-child(even) td{background:var(--panelalt)}
+td.k{font-family:var(--semi)}
+td b{font-family:var(--bold)}
+.g{color:var(--green)}.r{color:var(--red)}.a{color:var(--amber)}.bl{color:var(--blue)}
+td.c{text-align:center}
+
+/* ---- code contrast ---- */
+.codes{display:flex;gap:10.5pt;margin-top:15pt}
+.codebox{flex:1;box-sizing:border-box;background:var(--panel);border:.75pt solid var(--border);
+  border-radius:3.5pt;padding:9.5pt 11pt 11pt}
+.codebox .h{font-family:var(--bold);font-size:8.6pt;color:var(--ink);line-height:1}
+.codebox pre{font-family:var(--mono);font-size:7.5pt;line-height:1.5;margin:8pt 0 0;
+  color:var(--navy);white-space:pre}
+.codebox .cm{color:var(--muted)}
+.codebox .hl{color:var(--red)}
+.codebox .foot{font-size:7.9pt;line-height:1.4;color:var(--slate);margin-top:7.5pt}
+.codebox .foot b{color:var(--ink)}
+
+/* ---- progression strip ---- */
+.strip{display:flex;align-items:stretch;gap:5pt;margin-top:15pt}
+.strip .s{flex:1;background:var(--panel);border:.75pt solid var(--border);border-radius:3.5pt;
+  padding:8pt 7pt;box-sizing:border-box;text-align:center}
+.strip .s .n{font-family:var(--bold);font-size:6.6pt;letter-spacing:.09em;color:var(--muted);
+  display:block;line-height:1}
+.strip .s .t2{font-family:var(--bold);font-size:8.4pt;color:var(--ink);display:block;
+  margin-top:4pt;line-height:1.25}
+.strip .s .d{font-size:7.2pt;line-height:1.35;color:var(--slate);margin-top:3.5pt;display:block}
+.strip .ar{align-self:center;font-family:var(--bold);font-size:9pt;color:var(--blue)}

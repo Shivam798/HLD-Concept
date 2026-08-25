@@ -1,0 +1,119 @@
+/* ---- components added for the split volumes: cover, contents, Q&A ---- */
+
+/* ============ cover ============ */
+.cover{padding:0;color:#fff;position:relative;overflow:hidden}
+.cover .bg{position:absolute;inset:0;background:var(--bgimg)}
+.cover .bg.caching{background:
+  radial-gradient(52% 37% at 90% 7%, rgba(180,190,255,.42) 0%, rgba(170,182,255,.10) 58%, rgba(168,179,255,0) 72%),
+  radial-gradient(34% 24% at 2% 99%, rgba(255,168,158,.42) 0%, rgba(255,157,148,.08) 62%, rgba(255,157,148,0) 74%),
+  linear-gradient(157deg,#171a3c 0%,#1f2351 18%,#262b63 33%,#2d2d6a 46%,#3f2a6c 60%,
+                  #5e3576 76%,#742253 89%,#8d1f2f 100%)}
+.cover .bg.redis{background:
+  radial-gradient(52% 37% at 90% 7%, rgba(255,196,186,.34) 0%, rgba(255,186,176,.08) 58%, rgba(255,178,168,0) 72%),
+  radial-gradient(34% 24% at 2% 99%, rgba(255,140,110,.40) 0%, rgba(255,120,96,.08) 62%, rgba(255,120,96,0) 74%),
+  linear-gradient(157deg,#16162e 0%,#1e1738 18%,#2b1a3c 33%,#3d1b3c 46%,#561c37 60%,
+                  #7a1e2e 78%,#9d1f26 90%,#c62828 100%)}
+.cover .cin{position:absolute;left:57pt;top:0;width:482pt;height:841.92pt}
+.cover .eyebrow{position:absolute;top:65pt;font-family:var(--semi);font-size:10pt;
+  letter-spacing:.30em;color:var(--eye,#a9b3ff);line-height:1}
+.cover.redis .eyebrow{color:#ffb0a6}
+.cover h1{position:absolute;top:88pt;font-family:var(--black);font-size:40pt;line-height:1.05;
+  color:#fff;margin:0;letter-spacing:-.01em;width:470pt}
+.cover h1 .hi{color:var(--hi,#ff9d94)}
+.cover .bar{position:absolute;top:238pt;width:108pt;height:5pt;border-radius:2.5pt;
+  background:var(--barg,linear-gradient(90deg,#ff8d7f 0%,#8b8cf0 100%))}
+.cover .lede{position:absolute;top:258pt;width:400pt;font-size:13pt;line-height:1.5;
+  color:var(--ledec,#ccd2f0);margin:0}
+.cover.redis .lede{color:#e8d5da}
+.cover .grid{position:absolute;top:528pt;width:482pt}
+.cover .cc{position:absolute;box-sizing:border-box;background:rgba(255,255,255,.075);
+  border:.8pt solid rgba(255,255,255,.14);border-radius:5pt;padding:14pt 16pt 15pt;width:233pt}
+.cover .cc h4{margin:0;font-family:var(--bold);font-size:11.5pt;line-height:1.2;color:#fff}
+.cover .cc p{margin:8.5pt 0 0;font-size:9pt;line-height:1.5;color:var(--cardp,#c8cfe9)}
+.cover.redis .cc p{color:#e3ccd0}
+.cover .cc.a{left:0;top:0}.cover .cc.b{left:249pt;top:0}
+.cover .cc.c{left:0;top:91.5pt}.cover .cc.d{left:249pt;top:91.5pt}
+.cover .rule{position:absolute;top:742pt;width:482pt;height:.8pt;background:rgba(255,255,255,.20)}
+.cover .meta{position:absolute;top:750pt;width:482pt;font-size:9pt;color:var(--metac,#a5adcf);
+  display:flex;justify-content:space-between}
+.cover.redis .meta{color:#d3b4b8}
+
+/* ============ contents ============ */
+.chip{display:inline-block;padding:5pt 9.5pt 5.5pt;background:var(--acctint,#ecebfb);color:var(--acc,var(--blue));
+  border-radius:3pt;font-family:var(--bold);font-size:8.5pt;letter-spacing:.20em;line-height:1}
+.chip.rev{background:var(--tealtint);color:var(--teal)}
+h1.big{font-family:var(--black);font-size:21pt;line-height:1.15;color:var(--ink);
+  margin:11pt 0 0;letter-spacing:-.005em}
+p.sub{font-size:10.99pt;line-height:1.5;color:var(--slate);margin:11pt 0 0;max-width:468pt}
+hr.thin{border:0;height:.75pt;background:var(--border);width:468pt;margin:19pt 0 0}
+.toc{margin-top:11pt}
+.toc .row{position:relative;padding:16pt 0 13pt 31pt;border-bottom:.75pt solid var(--border)}
+.toc .n{position:absolute;left:0;top:16.5pt;width:22.4pt;height:23.3pt;border-radius:3pt;
+  background:var(--acc,var(--blue));color:#fff;font-family:var(--black);font-size:9pt;text-align:center;
+  line-height:23.3pt}
+.toc .n.ref{background:var(--red)}
+.toc .n.star{background:var(--teal);font-size:9.5pt}
+.toc .row h4{margin:0;font-family:var(--bold);font-size:10.99pt;line-height:1.2;color:var(--ink)}
+.toc .row p{margin:6.5pt 0 0;font-size:8.8pt;line-height:1.5;color:var(--muted)}
+p.foot{margin:15pt 0 0;font-size:8.8pt;line-height:1.5;color:var(--muted)}
+p.foot b{color:var(--slate)}
+
+/* ============ Q&A cards ============ */
+.qa{margin-top:14pt;border:.75pt solid var(--border);border-radius:4pt;overflow:hidden}
+.qa .qh{background:var(--navy);padding:8.5pt 13pt 9pt;display:block}
+.qa .qh .qn{font-family:var(--bold);font-size:10pt;color:var(--qn,#8b93ff);letter-spacing:.02em}
+.qa .qh .qt{font-family:var(--bold);font-size:10.5pt;color:#fff;margin-left:7pt}
+.qa .qb{padding:11.5pt 13pt 12pt;background:#fff}
+.qa .qb p{margin:0;font-size:9.6pt;line-height:1.58;color:var(--ink)}
+.qa .qb p + p{margin-top:8pt}
+.qa .qb .tail{margin-top:10pt;padding-top:8.5pt;border-top:.6pt dashed var(--border);
+  font-size:8.7pt;line-height:1.5;color:var(--muted)}
+.qa .qb .tail b{font-family:var(--bold);color:var(--teal)}
+.qa .qb .tail.g b{color:var(--green)}
+.qa .qb .tail.b b{color:var(--blue)}
+h2.qhead{margin-top:0}
+
+/* ============ fact grid (eight facts) ============ */
+.facts{display:flex;flex-wrap:wrap;gap:10.5pt;margin-top:15pt}
+.facts .f{width:255.75pt;box-sizing:border-box;background:#fff;border:.75pt solid var(--border);
+  border-top:2.2pt solid var(--red);border-radius:3.5pt;padding:10pt 12pt 11pt}
+.facts.blue .f{border-top-color:var(--blue)}
+.facts.acc .f{border-top-color:var(--acc,var(--blue))}
+.facts .f h4{margin:0;font-family:var(--bold);font-size:10pt;line-height:1.2;color:var(--ink)}
+.facts .f p{margin:6.5pt 0 0;font-size:8.89pt;line-height:1.45;color:var(--slate)}
+.mono{font-family:var(--mono);font-size:.87em;background:var(--panel);
+  border:.6pt solid var(--border);border-radius:2.5pt;padding:.9pt 2.6pt;color:var(--navy)}
+
+/* ============ formula strip / closing box ============ */
+.formula{margin-top:14pt;background:var(--panel);border:.75pt solid var(--border);
+  border-radius:3.5pt;padding:12pt 14pt;text-align:center}
+.formula .f1{font-family:var(--bold);font-size:11.5pt;color:var(--ink);line-height:1.4}
+.formula .f2{font-size:9.2pt;line-height:1.5;color:var(--slate);margin-top:8pt}
+.closing{margin-top:16pt;border-left:2.8pt solid var(--acc,var(--blue));background:var(--acctint,var(--bluetint));
+  padding:12pt 15pt 13pt 15.7pt}
+.closing .lbl{font-family:var(--bold);font-size:9pt;letter-spacing:.11em;color:var(--acc,var(--blue));
+  display:block;line-height:1}
+.closing p{font-size:10.6pt;line-height:1.6;margin-top:9.5pt;color:var(--ink)}
+p.src{margin-top:16pt;font-size:7.6pt;line-height:1.5;color:var(--muted)}
+p.src b{font-family:var(--bold);color:var(--slate)}
+
+/* the Redis volume keeps the accent in its own palette */
+.cover.redis .bar{background:linear-gradient(90deg,#ff9d8f 0%,#d0342c 100%)}
+
+/* ============ concept-volume additions ============ */
+.badge{background:var(--acctint,var(--purpletint));color:var(--acc,var(--purple))}
+figure{margin:19pt 0 0}
+figure svg{display:block;margin:0 auto}
+.figtitle{font-family:var(--bold);font-size:8.6pt;color:var(--ink);margin:0 0 6pt}
+.kv{margin-top:15pt;display:flex;flex-wrap:wrap;gap:9pt}
+.kv .i{width:256.5pt;box-sizing:border-box;background:var(--panelalt);border:.75pt solid var(--border);
+  border-radius:3.5pt;padding:9pt 10pt 10pt}
+.kv .i h5{margin:0;font-family:var(--bold);font-size:9.2pt;line-height:1.2;color:var(--ink)}
+.kv .i p{margin:5.5pt 0 0;font-size:8.4pt;line-height:1.42;color:var(--slate)}
+.lead{font-size:10.39pt;line-height:1.585;margin:13pt 0 0}
+ul.bul{margin:12pt 0 0;padding:0;list-style:none}
+ul.bul li{font-size:10.39pt;line-height:1.55;color:var(--ink);margin-top:7pt;
+  padding-left:12pt;text-indent:-12pt}
+ul.bul li:before{content:"\2022";color:var(--acc,var(--blue));font-family:var(--bold);
+  padding-right:6pt}
+ul.bul li b{font-family:var(--bold)}
