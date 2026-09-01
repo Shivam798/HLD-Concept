@@ -25,16 +25,16 @@ book.raw(cover(
     THEME, EYEBROW,
     u'The Complete Guide<br>to <span class="hi">Rate Limiting</span>',
     u'Five algorithms, drawn rather than described — then what changes the moment the limiter '
-    u'runs on more than one machine, and what you owe the client you just said no to.',
+    u'runs on more than one machine, and what it takes to run one in production.',
     [(u'Five algorithms, one picture each',
       u'Fixed window, sliding log, sliding counter, token bucket, leaky bucket.'),
      (u'One trace, five verdicts',
       u'The same 23 requests through all five, simulated — not illustrated.'),
      (u'Distributed, honestly',
       u'Local vs central vs gossip, the read-modify-write race, and the atomic fix.'),
-     (u'The contract you ship',
-      u'429, Retry-After, RateLimit headers, jitter, and layered limits.')],
-    u'8 parts · 16 diagrams · 14 interview Q&amp;A · one-page cheat sheet',
+     (u'Production-ready, not textbook',
+      u'Fail open or closed, picking the number, and the eight easy mistakes.')],
+    u'7 parts · 14 diagrams · 14 interview Q&amp;A · one-page cheat sheet',
     u'Revised August 2026'))
 
 book.page(toc(
@@ -54,11 +54,9 @@ book.page(toc(
      (u'5', u'', u'Rate limiting across many machines',
       u'Local vs central vs gossip, the counter race, Lua atomicity, and Redis on the hot '
       u'path.'),
-     (u'6', u'', u'The contract with the client',
-      u'429 vs 503, Retry-After, RateLimit headers, jitter, and layering limits by identity.'),
-     (u'7', u'', u'Production concerns',
-      u'Fail open or closed, picking the number, limiting by cost, testing and rollout.'),
-     (u'8', u'', u'The interview itself',
+     (u'6', u'', u'Production concerns',
+      u'Fail open or closed, picking the number, and the eight mistakes that bite in prod.'),
+     (u'7', u'', u'The interview itself',
       u'How to structure the answer, 14 asked-in-real-interviews Q&amp;A, and the red flags.'),
      (STAR, u'star', u'One-page cheat sheet',
       u'The night-before page: the five algorithms in one table, the numbers, eight facts.')],
@@ -384,64 +382,13 @@ book.page(
 
 # ═════════════════════════════════════════════════════════ Part 6
 book.page(
-    part(u'The contract with the client', u'PART 6',
-         u'A limiter that says no badly creates more load than the traffic it rejected. What '
-         u'you return is part of the design, not an afterthought.'),
-    fig(u'6.1', F.fig_response(),
-        u'The response, and the retry it should produce. Jitter is not a nicety — it is the '
-        u'difference between shedding load and oscillating.'),
-    kv([(u'Retry-After is the important one',
-         u'It converts guessing into waiting. Without it, well-behaved clients invent their '
-         u'own backoff and it is usually wrong.'),
-        (u'Send headers on 200s too',
-         u'A client that can see 3 of 100 used will pace itself. A client that only learns at '
-         u'the wall will hit it every time.')]),
-    codes(
-        codebox(u'On every successful response',
-                u'HTTP/1.1 200 OK\n'
-                u'RateLimit-Limit: 100\n'
-                u'RateLimit-Remaining: 97\n'
-                u'RateLimit-Reset: 41'),
-        codebox(u'On the one you refuse',
-                u'HTTP/1.1 429 Too Many Requests\n'
-                u'Retry-After: 12\n'
-                u'RateLimit-Remaining: 0\n'
-                u'RateLimit-Reset: 12'),
-    ),
-)
-
-book.page(
-    h2(u'6.2 What to key the limit on', 'qhead'),
-    fig(u'6.2', F.fig_keys(),
-        u'Limits nest. A request passes only if every layer it touches says yes, and the '
-        u'narrowest layer is usually the one that says no.'),
-    table([u'Key', u'Good for', u'The catch'],
-          [(u'IP address', u'Unauthenticated traffic, crude abuse defence',
-            u'Carrier NAT and corporate egress put thousands of users behind one IP; IPv6 '
-            u'gives one user billions'),
-           (u'API key / account', u'Everything authenticated — this is the real identity',
-            u'Nothing, which is why it is the default. Just make sure the key is verified '
-            u'before it is counted'),
-           (u'User + endpoint', u'Stopping one expensive route from eating the whole quota',
-            u'Config sprawl: you now have a limit matrix to maintain and document'),
-           (u'Cost units', u'LLM tokens, rows scanned, CPU seconds, outbound SMS',
-            u'You do not know the cost until after you run it — reserve an estimate, then '
-            u'reconcile'),
-           (u'Global', u'A last-resort ceiling on the whole service',
-            u'It is load shedding wearing a rate limiter’s clothes; keep it well above normal '
-            u'peak')],
-          [86.0, 190.0, 246.0]),
-)
-
-# ═════════════════════════════════════════════════════════ Part 7
-book.page(
-    part(u'Production concerns', u'PART 7',
+    part(u'Production concerns', u'PART 6',
          u'The algorithm is a day of work. These are the decisions that decide whether the '
          u'limiter helps you at 3 a.m. or becomes the outage.'),
-    fig(u'7.1', F.fig_failures(),
+    fig(u'6.1', F.fig_failures(),
         u'The four failure modes worth naming unprompted. Each has one correct answer and one '
         u'tempting wrong one.'),
-    h2(u'7.2 Fail open or fail closed?'),
+    h2(u'6.2 Fail open or fail closed?'),
     cards(
         ('good', u'Fail open — the usual choice',
          [u'Redis is down, so allow the request. You lose protection for the duration, but the '
@@ -455,7 +402,7 @@ book.page(
 )
 
 book.page(
-    h2(u'7.3 Picking the number', 'qhead'),
+    h2(u'6.3 Picking the number', 'qhead'),
     strip([(u'1', u'Measure', u'p99 of real per-client rate over a fortnight'),
            (u'2', u'Set high', u'~10x that, so nobody legitimate is hit'),
            (u'3', u'Shadow', u'log what would have been rejected, reject nothing'),
@@ -464,7 +411,7 @@ book.page(
     p(u'The mistake is picking a round number and shipping it. The limit exists to stop the '
       u'pathological case, so it should sit far above the legitimate one — and the only way to '
       u'know where that is, is to have measured.'),
-    h2(u'7.4 Things that are easy to get wrong'),
+    h2(u'6.4 Things that are easy to get wrong'),
     kv([(u'Counting rejected requests',
          u'A throttled client that keeps retrying should not dig its own hole deeper. Only '
          u'record allowed requests — every implementation in this guide does.'),
@@ -491,12 +438,12 @@ book.page(
          u'the entire bug surface of a rate limiter.')]),
 )
 
-# ═════════════════════════════════════════════════════════ Part 8
+# ═════════════════════════════════════════════════════════ Part 7
 book.page(
-    part(u'The interview itself', u'PART 8',
+    part(u'The interview itself', u'PART 7',
          u'“Design a rate limiter” is asked as an LLD question and as a component of half the '
          u'HLD questions. The structure below fits in ninety seconds.'),
-    h2(u'8.1 The order to say it in'),
+    h2(u'7.1 The order to say it in'),
     strip([(u'1', u'Clarify', u'What is it protecting? Who is the caller?'),
            (u'2', u'Key', u'IP, API key, tenant — and say why'),
            (u'3', u'Algorithm', u'Name two, pick one, justify in one sentence'),
@@ -512,7 +459,7 @@ book.page(
              u'on successful responses too. If Redis is unreachable I fail open, but with a '
              u'local in-process bucket as a backstop so ‘open’ still has a ceiling.”'],
             'teal'),
-    h2(u'8.2 What they are actually scoring'),
+    h2(u'7.2 What they are actually scoring'),
     kv([(u'Did you name a trade-off?',
          u'Any of the five is a defensible answer. Picking one without saying what it costs '
          u'is not.'),
@@ -625,7 +572,7 @@ book.page(
 )
 
 book.page(
-    h2(u'8.3 Red flags interviewers listen for', 'qhead'),
+    h2(u'7.3 Red flags interviewers listen for', 'qhead'),
     table([u'Saying this', u'Says this about you'],
           [(u'Only naming one algorithm', u'Has memorised a blog post, not the trade-off'),
            (u'Fixed window presented as the final answer', u'Does not know the boundary bug'),
@@ -643,7 +590,7 @@ book.page(
            (u'Limiting after the expensive work', u'Has already spent what the limit was '
                                                   u'meant to save')],
           [232.0, 290.0]),
-    h2(u'8.4 Real systems worth name-dropping'),
+    h2(u'7.4 Real systems worth name-dropping'),
     cards(
         ('', u'Cloudflare’s sliding window counter',
          [u'The blog post that made the two-counter approximation standard, with the measured '
